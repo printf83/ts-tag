@@ -1,0 +1,44 @@
+{
+	"name": "@printf83/ts-tag",
+	"version": "0.0.1",
+	"description": "Build DOM using TS",
+	"keywords": [
+		"dom",
+		"tag",
+		"typescript"
+	],
+	"author": "Hamzah A <printf83@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/printf83/ts-tag/issues"
+	},
+	"homepage": "https://github.com/printf83/ts-tag#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/printf83/ts-tag.git"
+	},
+	"main": "./build/esm/index.js",
+	"types": "./build/types/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./build/types/index.d.ts",
+			"require": "./build/cjs/index.js",
+			"import": "./build/esm/index.js",
+			"default": "./build/esm/index.js"
+		}
+	},
+	"devDependencies": {
+		"@types/node": "^20.6.3",
+		"typescript": "^5.2.2"
+	},
+	"scripts": {
+		"link": "npm link",
+		"clean": "node scripts/clean.cjs",
+		"compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+		"debug": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json -w",
+		"prepare": "node ./scripts/esm-package-json.cjs",
+		"build": "npm run compile && npm run prepare",
+		"rebuild": "npm run clean && npm run compile && npm run prepare",
+		"prepack": "npm run rebuild"
+	}
+}
