@@ -2,10 +2,18 @@ import { attachAttr } from "./attr.js";
 import { html } from "./html.js";
 import { elem } from "./interface.js";
 import { tag } from "./tag.js";
-import { isHtml, isTag } from "./util.js";
-import { mergeAttr, mergeClass, mergeObject, tagConstructor, tagConstructorNoElement } from "./util.js";
+import {
+	mergeAttr,
+	mergeClass,
+	mergeObject,
+	tagConstructor,
+	tagConstructorNoElement,
+	isAttr,
+	isHtml,
+	isTag,
+} from "./util.js";
 
-export { mergeAttr, mergeClass, mergeObject, tagConstructor, tagConstructorNoElement };
+export { mergeAttr, mergeClass, mergeObject, tagConstructor, tagConstructorNoElement, isAttr, isHtml, isTag };
 
 const htmlToElement = (strHTML: string) => {
 	var template = document.createElement("div");
