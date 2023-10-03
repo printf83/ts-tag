@@ -3,6 +3,9 @@ import { html } from "./html.js";
 import { elem } from "./interface.js";
 import { tag } from "./tag.js";
 import { isHtml, isTag } from "./util.js";
+import { mergeAttr, mergeClass, mergeObject, tagConstructor, tagConstructorNoElement } from "./util.js";
+
+export { mergeAttr, mergeClass, mergeObject, tagConstructor, tagConstructorNoElement };
 
 const htmlToElement = (strHTML: string) => {
 	var template = document.createElement("div");
