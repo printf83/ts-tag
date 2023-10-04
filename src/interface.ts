@@ -1,7 +1,7 @@
 import { html } from "./html.js";
 import { tag } from "./tag.js";
 
-export interface style {
+interface style {
 	alignContent?: string;
 	alignItems?: string;
 	alignSelf?: string;
@@ -198,7 +198,7 @@ export interface style {
 	[key: string]: string | undefined;
 }
 
-export interface event {
+interface event {
 	afterprint?: EventListener;
 	beforeprint?: EventListener;
 	beforeunload?: EventListener;
@@ -282,17 +282,17 @@ export interface event {
 	[key: string]: EventListener | undefined;
 }
 
-export interface aria {
+interface aria {
 	[key: string]: string | number | boolean | undefined;
 }
 
-export interface data {
+interface data {
 	[key: string]: string | number | boolean | undefined;
 }
 
-export type elem = number | string | tag | html;
+type elem = number | string | tag | html;
 
-export interface attr {
+interface attr {
 	id?: string;
 	class?: string | (string | undefined)[];
 	accesskey?: string;
@@ -322,3 +322,5 @@ export interface attr {
 	style?: style;
 	elem?: elem | elem[];
 }
+
+export { style, event, aria, data, attr, elem };
