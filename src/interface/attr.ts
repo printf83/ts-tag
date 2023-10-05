@@ -34,3 +34,7 @@ export interface attr {
 	style?: style;
 	elem?: elem | elem[];
 }
+
+export interface attrWithHref extends attr {
+	href?: string;
+}

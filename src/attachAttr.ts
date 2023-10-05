@@ -1,5 +1,5 @@
-import { ElementWithAbortController, addEvent, hasBuildAndDestroyEvent } from "./event.js";
-import { attr } from "./interface.js";
+import { attachFn, elementWithAbortController, attrWithHref, attr } from "./interface/_index.js";
+import { addEvent, hasBuildAndDestroyEvent } from "./event.js";
 import { addClassIntoElement, camel2Dash, keyOfType } from "./util.js";
 
 const CONVERTHASHTOVOID = true;
@@ -37,17 +37,7 @@ const BOOLATTR = [
 	"truespeed",
 ];
 
-type IAttachFn = (
-	key: string | undefined,
-	elem: Element,
-	attr: attr
-) => {
-	elem: Element;
-	attr: attr;
-	changed: boolean;
-};
-
-const cleanupAttr: IAttachFn = (key, elem, attr) => {
+const cleanupAttr: attachFn = (key, elem, attr) => {
 	let changed = false;
 	let k = keyOfType(key, attr);
 	if (attr && typeof attr[k] !== "undefined" && attr[k] === null) {
@@ -58,7 +48,7 @@ const cleanupAttr: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attachAria: IAttachFn = (key, elem, attr) => {
+const attachAria: attachFn = (key, elem, attr) => {
 	let changed = false;
 	if (key === "aria") {
 		if (attr && typeof attr.aria !== "undefined") {
@@ -78,7 +68,7 @@ const attachAria: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attachBoolean: IAttachFn = (key, elem, attr) => {
+const attachBoolean: attachFn = (key, elem, attr) => {
 	let changed = false;
 
 	if (key) {
@@ -102,7 +92,7 @@ const attachBoolean: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attachClass: IAttachFn = (key, elem, attr) => {
+const attachClass: attachFn = (key, elem, attr) => {
 	let changed = false;
 	if (key === "class") {
 		if (attr && typeof attr.class !== "undefined") {
@@ -115,7 +105,7 @@ const attachClass: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attachData: IAttachFn = (key, elem, attr) => {
+const attachData: attachFn = (key, elem, attr) => {
 	let changed = false;
 	if (key === "data") {
 		if (attr && typeof attr.data !== "undefined") {
@@ -135,7 +125,7 @@ const attachData: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attachEvent: IAttachFn = (key, elem, attr) => {
+const attachEvent: attachFn = (key, elem, attr) => {
 	let changed = false;
 	if (key === "on") {
 		if (attr && typeof attr.on !== "undefined") {
@@ -143,7 +133,7 @@ const attachEvent: IAttachFn = (key, elem, attr) => {
 			if (prop && prop.length > 0) {
 				for (let x = 0; x < prop.length; x++) {
 					if (typeof attr.on[prop[x]!] === "function") {
-						addEvent(prop[x]!, elem as ElementWithAbortController, attr.on[prop[x]!]!);
+						addEvent(prop[x]!, elem as elementWithAbortController, attr.on[prop[x]!]!);
 					}
 				}
 			}
@@ -155,11 +145,7 @@ const attachEvent: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-interface attrWithHref extends attr {
-	href?: string;
-}
-
-const attachHref: IAttachFn = (key, elem, attr: attrWithHref) => {
+const attachHref: attachFn = (key, elem, attr: attrWithHref) => {
 	let changed = false;
 	if (key === "href") {
 		if (attr && typeof attr.href !== "undefined") {
@@ -183,7 +169,7 @@ const attachHref: IAttachFn = (key, elem, attr: attrWithHref) => {
 	return { attr, elem, changed };
 };
 
-const attachStyle: IAttachFn = (key, elem, attr) => {
+const attachStyle: attachFn = (key, elem, attr) => {
 	let changed = false;
 	if (key === "style") {
 		if (attr && typeof attr.style !== "undefined") {
@@ -214,7 +200,7 @@ const attachStyle: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attachOther: IAttachFn = (key, elem, attr) => {
+const attachOther: attachFn = (key, elem, attr) => {
 	let changed = false;
 
 	if (key && attr && typeof attr !== "undefined") {
@@ -227,7 +213,7 @@ const attachOther: IAttachFn = (key, elem, attr) => {
 	return { attr, elem, changed };
 };
 
-const attrFn: IAttachFn[] = [
+const attrFn: attachFn[] = [
 	cleanupAttr,
 	attachBoolean,
 	attachData,

@@ -1,14 +1,8 @@
-import { attr } from "./interface.js";
+import { elementWithAbortController, attr } from "./interface/_index.js";
 
-export class ElementWithAbortController extends HTMLElement {
-	constructor(public AbortController?: AbortController) {
-		super();
-	}
-}
-
-const detachEvent = (elem: Element | ElementWithAbortController) => {
+const detachEvent = (elem: Element | elementWithAbortController) => {
 	if ("AbortController" in elem) {
-		const AbortController = (elem as ElementWithAbortController).AbortController;
+		const AbortController = (elem as elementWithAbortController).AbortController;
 		if (AbortController) {
 			console.info(`Deattach all event from $1`, elem);
 			AbortController.abort();
@@ -19,7 +13,7 @@ const detachEvent = (elem: Element | ElementWithAbortController) => {
 	}
 };
 
-export const addEvent = (name: string, elem: string | Element | ElementWithAbortController, fn: EventListener) => {
+export const addEvent = (name: string, elem: string | Element | elementWithAbortController, fn: EventListener) => {
 	if (typeof elem === "string") {
 		let e = document.querySelectorAll(elem);
 		if (e) {
@@ -48,19 +42,19 @@ export const addEvent = (name: string, elem: string | Element | ElementWithAbort
 				});
 			}
 		} else {
-			(elem as ElementWithAbortController).AbortController = new AbortController();
+			(elem as elementWithAbortController).AbortController = new AbortController();
 			elem.classList.add("bs-destroy-event");
 
 			//add event to element
 			//using signal to remove listerner
 			if (name === "build" || name === "destroy") {
 				elem.addEventListener(name, fn, {
-					signal: (elem as ElementWithAbortController).AbortController!.signal,
+					signal: (elem as elementWithAbortController).AbortController!.signal,
 					once: true,
 				});
 			} else {
 				elem.addEventListener(name, fn, {
-					signal: (elem as ElementWithAbortController).AbortController!.signal,
+					signal: (elem as elementWithAbortController).AbortController!.signal,
 				});
 			}
 		}
@@ -69,7 +63,7 @@ export const addEvent = (name: string, elem: string | Element | ElementWithAbort
 	}
 };
 
-export const removeEvent = (elem: string | Element | ElementWithAbortController) => {
+export const removeEvent = (elem: string | Element | elementWithAbortController) => {
 	if (typeof elem === "string") {
 		let e = document.querySelectorAll(elem);
 		if (e) {
@@ -83,7 +77,7 @@ export const removeEvent = (elem: string | Element | ElementWithAbortController)
 
 			//remove event from child
 			if (c?.length > 0) {
-				let d = Array.from(c).map((i) => i as ElementWithAbortController);
+				let d = Array.from(c).map((i) => i as elementWithAbortController);
 
 				d.forEach((e) => {
 					removeEvent(e);

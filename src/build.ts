@@ -1,7 +1,6 @@
-import { attachAttr } from "./attr.js";
-import { html } from "./html.js";
-import { elem } from "./interface.js";
-import { tag } from "./tag.js";
+import { html, tag } from "./component/_index.js";
+import { elem } from "./interface/_index.js";
+import { attachAttr } from "./attachAttr.js";
 import { isTag, isHtml } from "./util.js";
 
 const htmlToElement = (strHTML: string) => {
@@ -159,7 +158,11 @@ const getNode = (
 	element: elem | elem[],
 	stringBuilder?: (str: string) => elem | elem[]
 ): Element | Element[] | null => {
-	let container = build({ container: document.createElement("div"), element: element, stringBuilder: stringBuilder });
+	let container = build({
+		container: document.createElement("div"),
+		element: element,
+		stringBuilder: stringBuilder,
+	});
 	let childCount = container.childElementCount;
 	if (childCount === 0) return null;
 	if (childCount === 1) return container.firstChild as Element;
@@ -167,7 +170,11 @@ const getNode = (
 };
 
 const getHtml = (element: elem | elem[], stringBuilder?: (str: string) => elem | elem[]): string => {
-	let container = build({ container: document.createElement("div"), element: element, stringBuilder: stringBuilder });
+	let container = build({
+		container: document.createElement("div"),
+		element: element,
+		stringBuilder: stringBuilder,
+	});
 	let result = container.innerHTML;
 	removeElement(container);
 	return result;

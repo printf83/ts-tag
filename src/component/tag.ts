@@ -1,5 +1,5 @@
-import { elem, attr } from "./interface.js";
-import { isAttr } from "./util.js";
+import { elem, attr } from "../interface/_index.js";
+import { isAttr } from "../util.js";
 
 export class tag {
 	public istag = true;

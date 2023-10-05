@@ -1,6 +1,5 @@
-import { html } from "./html.js";
-import { attr } from "./interface.js";
-import { tag } from "./tag.js";
+import { html, tag } from "./component/_index.js";
+import { attr } from "./interface/_index.js";
 
 export const isTag = <T extends tag>(obj: any): obj is T => {
 	return typeof obj === "object" && !Array.isArray(obj) && "istag" in obj && obj["istag"] === true;
