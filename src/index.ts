@@ -17,7 +17,7 @@ import {
 	isHtml,
 	isTag,
 } from "./util.js";
-
+import { addEvent, removeEvent, hasBuildAndDestroyEvent } from "./event.js";
 import { getNode, getHtml, appendChild, prependChild, removeElement, replaceWith, replaceChild } from "./build.js";
 
 export const core = {
@@ -36,6 +36,9 @@ export const core = {
 	isAttr,
 	isHtml,
 	isTag,
+	addEvent,
+	removeEvent,
+	hasBuildAndDestroyEvent,
 };
 
 export namespace I {

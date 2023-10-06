@@ -13,7 +13,7 @@ const detachEvent = (elem: Element | elementWithAbortController) => {
 	}
 };
 
-export const addEvent = (name: string, elem: string | Element | elementWithAbortController, fn: EventListener) => {
+const addEvent = (name: string, elem: string | Element | elementWithAbortController, fn: EventListener) => {
 	if (typeof elem === "string") {
 		let e = document.querySelectorAll(elem);
 		if (e) {
@@ -63,7 +63,7 @@ export const addEvent = (name: string, elem: string | Element | elementWithAbort
 	}
 };
 
-export const removeEvent = (elem: string | Element | elementWithAbortController) => {
+const removeEvent = (elem: string | Element | elementWithAbortController) => {
 	if (typeof elem === "string") {
 		let e = document.querySelectorAll(elem);
 		if (e) {
@@ -90,7 +90,7 @@ export const removeEvent = (elem: string | Element | elementWithAbortController)
 	}
 };
 
-export const hasBuildAndDestroyEvent = (attr: attr) => {
+const hasBuildAndDestroyEvent = (attr: attr) => {
 	let hasBuild = false;
 	let hasDestroy = false;
 
@@ -106,3 +106,5 @@ export const hasBuildAndDestroyEvent = (attr: attr) => {
 
 	return { hasBuild, hasDestroy };
 };
+
+export { addEvent, removeEvent, hasBuildAndDestroyEvent };
