@@ -13,6 +13,22 @@ import {
 
 import { getNode, getHtml, appendChild, prependChild, removeElement, replaceWith, replaceChild } from "./build.js";
 
-export { getNode, getHtml, appendChild, prependChild, removeElement, replaceWith, replaceChild };
-export { mergeAttr, mergeClass, mergeObject, tagConstructor, tagConstructorNoElement, isAttr, isHtml, isTag };
+export const core = {
+	getNode,
+	getHtml,
+	appendChild,
+	prependChild,
+	removeElement,
+	replaceWith,
+	replaceChild,
+	mergeAttr,
+	mergeClass,
+	mergeObject,
+	tagConstructor,
+	tagConstructorNoElement,
+	isAttr,
+	isHtml,
+	isTag,
+};
+
 export { style, event, aria, data, attr, elem, tag, html };
