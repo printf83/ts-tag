@@ -1,6 +1,6 @@
 {
 	"name": "@printf83/ts-tag",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Build DOM using TS",
 	"keywords": [
 		"dom",

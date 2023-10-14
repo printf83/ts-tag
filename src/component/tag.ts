@@ -24,7 +24,14 @@ export class tag {
 					this.elem = arg[1].elem;
 
 					delete arg[1].elem;
-					this.attr = arg[1];
+					this.attr = this.convert(arg[1]);
+
+					if (this.attr.elem) {
+						this.elem = this.attr.elem;
+						delete this.attr.elem;
+					} else {
+						this.elem = arg[2];
+					}
 				} else {
 					this.elem = arg[1];
 				}
@@ -32,13 +39,23 @@ export class tag {
 				delete arg[1].elem;
 
 				this.tag = arg[0];
-				this.attr = arg[1];
-				this.elem = arg[2];
+				this.attr = this.convert(arg[1]);
+
+				if (this.attr.elem) {
+					this.elem = this.attr.elem;
+					delete this.attr.elem;
+				} else {
+					this.elem = arg[2];
+				}
 			} else {
 				this.tag = "div";
 			}
 		} else {
 			this.tag = "div";
 		}
+	}
+
+	convert(attr: attr): attr {
+		return attr;
 	}
 }
